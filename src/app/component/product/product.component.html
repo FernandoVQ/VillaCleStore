@@ -1,0 +1,5 @@
+    <h3>{{product.title}}</h3>
+    <img [src]="product.image" alt="">
+    <strong> {{product.price}} </strong>
+    <button (click)="agregar(product.price)" >Agregar al carrito de compra</button>
+    <a [routerLink]="['/products', product.id]">Ver detalle</a>

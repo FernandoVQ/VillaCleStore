@@ -1,0 +1,6 @@
+
+<button (click)="addItem()" > Agregar </button>
+<ul>
+  <li *ngIf="paises.length==0" > La lista esta vacia </li>
+  <li *ngFor='let name of paises, index as i'> {{name}} <button (click)="dropItem(i)"> X </button></li>
+</ul>
