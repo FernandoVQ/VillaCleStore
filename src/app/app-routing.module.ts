@@ -4,8 +4,8 @@ import { AdminGuard } from './admin.guard';
 import { DemoComponent } from './demo/demo.component';
 import { LayoutComponent } from './layout/layout.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { ProductsComponent } from './products/products.component';
+import { ProductDetailComponent } from './product/components/product-detail/product-detail.component';
+import { ProductsComponent } from './product/components/products/products.component';
 
 const routes: Routes = [
   {
