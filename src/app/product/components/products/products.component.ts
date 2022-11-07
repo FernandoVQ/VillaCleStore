@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../../product.model';
+import { ProductsService } from 'src/app/core/services/products/products.service';
 
 @Component({
   selector: 'app-products',
@@ -8,61 +8,51 @@ import { Product } from '../../../product.model';
 })
 export class ProductsComponent implements OnInit {
 
-  
+  categoria: string = "1";
+  productos: any;
+  tipo: string = "1";
+  abrirCarrito: boolean = false;
+  totalcarrito: any = [];
+  count: number = 0;
+  constructor(private productsService: ProductsService) { }
 
-  productos:Product[] = [
-    {
-      id: '1',
-      image: 'assets/images/camiseta.png',
-      title: 'Camiseta',
-      price: 80000,
-      description: 'bla bla bla bla bla'
-    },
-    {
-      id: '2',
-      image: 'assets/images/hoodie.png',
-      title: 'Hoodie',
-      price: 80000,
-      description: 'bla bla bla bla bla'
-    },
-    {
-      id: '3',
-      image: 'assets/images/mug.png',
-      title: 'Mug',
-      price: 80000,
-      description: 'bla bla bla bla bla'
-    },
-    {
-      id: '4',
-      image: 'assets/images/pin.png',
-      title: 'Pin',
-      price: 80000,
-      description: 'bla bla bla bla bla'
-    },
-    {
-      id: '5',
-      image: 'assets/images/stickers1.png',
-      title: 'Stickers',
-      price: 80000,
-      description: 'bla bla bla bla bla'
-    },
-    {
-      id: '6',
-      image: 'assets/images/stickers2.png',
-      title: 'Stickers',
-      price: 80000,
-      description: 'bla bla bla bla bla'
-    }]
+  ngOnInit(): void {
+    this.tipo = this.productsService.categoria;
+    this.productsService.getProducts().subscribe(resp => {
+      if (Array.isArray(resp) && this.tipo !== "1") {
+        let productoss
+        productoss = resp.filter(depas => depas.tipo == this.tipo)
+        this.productos = productoss;
+      } else {
+        this.productos = resp;
+      }
+    })
+  }
 
-    constructor() { }
+  clicked(item) {
+    this.count++
+    this.totalcarrito.push(item);
+    this.productsService.itemscarrito = this.totalcarrito;
 
-    ngOnInit(): void {
-      console.log(this.productos);
-    }
+  }
 
-  
+  seleccionar(categoria) {
+    this.productsService.getProducts().subscribe(resp => {
+      if (Array.isArray(resp) && categoria !== "1") {
+        let productoss
+        productoss = resp.filter(depas => depas.tipo == categoria)
+        this.productos = productoss;
+      } else {
+        this.productos = resp;
+      }
+    })
+  }
 
-  clicked(id){
-    console.log(id);
+  AbrirDetalle() {
+    this.abrirCarrito = true;
+  }
+
+  CerrarDetalle() {
+    this.abrirCarrito = false;
   }
 }

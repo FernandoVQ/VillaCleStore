@@ -1,5 +1,25 @@
-    <h3>{{product.title}}</h3>
-    <img [src]="product.image" alt="">
-    <strong> {{product.price}} </strong>
-    <button (click)="agregar(product.price)" >Agregar al carrito de compra</button>
-    <a [routerLink]="['/products', product.id]">Ver detalle</a>
+<div>
+    <h3 style="text-align: center;font-weight: 900; font-size: 25px;">{{product.title}}</h3>
+    <div class="img-container">
+        <img [src]="product.image" alt="">
+    </div>
+    <div style="text-align: center;">
+        <strong> ${{product.price2}} - s/ {{product.price}} </strong>
+    </div>
+    <div style="text-align: center;">
+        <button (click)="agregar()" mat-flat-button color="primary" [disabled]="disable">Agregar al carrito
+            de compra</button>
+        <button mat-mini-fab color="primary" (click)="add()">
+            <mat-icon>add</mat-icon>
+        </button>
+        <a>
+            {{count}}
+        </a>
+        <button mat-mini-fab color="primary" class="ml-2" (click)="remove()">
+            <mat-icon>remove</mat-icon>
+        </button>
+    </div>
+    <div style="text-align: center;">
+        <a [routerLink]="['/products', product.id]" (click)="verDetalle(product)">Ver detalle</a>
+    </div>
+</div>
